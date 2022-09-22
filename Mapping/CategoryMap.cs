@@ -6,7 +6,7 @@ using PatikaPaycoreBootcampFinalProject.Model;
 namespace PatikaPaycoreBootcampHW3.Mapping
 {
     public class CategoryMap : ClassMapping<Category>
-    {   // Container tablosu map işlemleri
+    {   // Category tablosu map işlemleri
         public CategoryMap()
         {   // Primary key olduğu için property yerine id kullanıldı.
             Id(x => x.Id, x =>
