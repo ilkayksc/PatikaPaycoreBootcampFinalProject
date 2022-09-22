@@ -14,8 +14,39 @@
     <li>NHibernate & Fluent NHibernate</li>
 </ul>
 
+## Uygulamanın Çalıştırılması
+Uygulamanın çalıştırılabilmesi için yukarıda belirtilen teknoloji ve kütüphanelerin projeye dahil edilmesi gerekmektedir.
+Gerekli kütüphaneler eklendikten sonra AppSettings.json dosyası içerisinde aşağıda belirtilen alanlardaki bilgilerin girilmesi gerekmektedir.
+Bilgileri girdikten sonra uygulamayı çalıştırabilirsiniz.
 
+###### Veri Tabanı Baglantı Ayarları
+```json
+"AllowedHosts": "*",
+    "ConnectionStrings": { 
+    "PostgreSqlConnection": "User ID = '';Password = '';Server='' ;Port='' ;Database = '';Integrated Security= true;Pooling= true;" 
+  }
+```
+###### JWT Ayarları
+```json
+"JwtConfig": {
+  
+    "Secret": "",
+    "Issuer": "",
+    "Audience": "",
+    "AccessTokenExpiration": 
+ 
+  }
+```
 
+###### Smtp Ayarları
+```json
+"SmtpConnectionString": {
+    "UserName": "", 
+    "Password": "",
+    "Host": "",
+    "Port": 
+  }
+```
 
 ## API Kullanımı
 ### Account
