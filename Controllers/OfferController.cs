@@ -59,30 +59,32 @@ namespace PatikaPaycoreBootcampFinalProject.Controllers
            
             var result = offerService.Insert(request);
             var accountInfo = accountService.GetById(result.Response.Customer).Response;
-            BackgroundJob.Schedule(() => JobDelayed.Run("ilkay.ksc2@gmail.com", $"sayın  {accountInfo.Name} {accountInfo.Surname} Teklifiniz Alınmıştır.", "Teklifiniz Alınmıştır."), TimeSpan.FromSeconds(2));
+            BackgroundJob.Schedule(() => JobDelayed.Run(accountInfo.Email, $"sayın  {accountInfo.Name} {accountInfo.Surname} Teklifiniz Alınmıştır.", "Teklifiniz Alınmıştır."), TimeSpan.FromSeconds(2));
 
 
             return result;
-        }
+        }   
+        // Kullanıcının ürünlerine gelen teklifler.
         [HttpGet("GetOfferForMyProduct")]
         public BaseResponse<IEnumerable<OfferDto>> GetOffersForMyProduct()
         {
             var result = offerService.GetOffersForMyProduct();
             return result;
         }
+        // Gelen Teklifi Kabul Et.
         [HttpGet("AcceptOffer")]
         public BaseResponse<OfferDto> AcceptOffer(long id)
         {
             var offer = offerService.GetById(id);
             offer.Response.IsAccept = true;
             var response = offerService.Update(id,offer.Response);
-
+            // Teklif kabul edildiğinde müşteriye bilgilendirme maili gönderilir.
             var accountInfo = accountService.GetById(response.Response.Customer).Response;
-            BackgroundJob.Schedule(() => JobDelayed.Run("ilkay.ksc2@gmail.com", $"sayın  {accountInfo.Name} {accountInfo.Surname} Teklifiniz Kabul Edilmiştir.Ürünü Satın Alabilirsiniz.", "Teklifiniz Kabul Edilmiştir."), TimeSpan.FromSeconds(2));
+            BackgroundJob.Schedule(() => JobDelayed.Run(accountInfo.Email, $"sayın  {accountInfo.Name} {accountInfo.Surname} Teklifiniz Kabul Edilmiştir.Ürünü Satın Alabilirsiniz.", "Teklifiniz Kabul Edilmiştir."), TimeSpan.FromSeconds(2));
 
             return response;
         }
-
+        // Gelen Teklifi Reddet.
         [HttpGet("RejectOffer")]
         public BaseResponse<OfferDto> RejectOffer(long id)
         {
@@ -90,7 +92,8 @@ namespace PatikaPaycoreBootcampFinalProject.Controllers
             offer.Response.IsAccept = false;
             var response = offerService.Update(id, offer.Response);
             var accountInfo = accountService.GetById(response.Response.Customer).Response;
-            BackgroundJob.Schedule(() => JobDelayed.Run("ilkay.ksc2@gmail.com", $"sayın  {accountInfo.Name} {accountInfo.Surname} Teklifiniz Ürün Sahibi Tarafından Reddedilmiştir.", "Teklifiniz Reddildi."), TimeSpan.FromSeconds(2));
+            // Teklif Reddedildiğinde müşteriye bilgilendirme maili gönderilir.
+            BackgroundJob.Schedule(() => JobDelayed.Run(accountInfo.Email, $"sayın  {accountInfo.Name} {accountInfo.Surname} Teklifiniz Ürün Sahibi Tarafından Reddedilmiştir.", "Teklifiniz Reddildi."), TimeSpan.FromSeconds(2));
 
             return response;
         }
