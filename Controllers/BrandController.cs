@@ -19,7 +19,7 @@ using ISession = NHibernate.ISession;
 
 namespace PatikaPaycoreBootcampFinalProject.Controllers
 {
-
+    [Required]
     [Route("api/[controller]")]
     [ApiController]
     public class BrandController : ControllerBase
