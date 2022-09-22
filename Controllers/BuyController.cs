@@ -19,7 +19,7 @@ using ISession = NHibernate.ISession;
 
 namespace PatikaPaycoreBootcampFinalProject.Controllers
 {
-
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BuyController : ControllerBase
@@ -36,7 +36,7 @@ namespace PatikaPaycoreBootcampFinalProject.Controllers
             this.offerService = offerService;
             this._productService = productService;
         }
-
+        // Kabul Edilmiş olan Teklifler Listelenir.
         [HttpGet("GetAcceptedOffers")]
         public BaseResponse<IEnumerable<OfferDto>> GetAcceptedOffers()
         {
@@ -45,11 +45,12 @@ namespace PatikaPaycoreBootcampFinalProject.Controllers
 
             return new BaseResponse<IEnumerable<OfferDto>>(result);
         }
-
+        // Satınalma işleminin gerçekleştirilmesi.
         [HttpPost]
         public BaseResponse<BuyDto> Buy([FromBody] BuyDto request)
         {
             var product = _productService.GetAll().Response.Where(res => res.Id == request.ProductId).FirstOrDefault();
+            // Ürünün bir daha satılmaması için isSold alanını güncelledik.
             product.IsSold = true;
             var result = buyService.Insert(request);
             _productService.Update(product.Id, product);
