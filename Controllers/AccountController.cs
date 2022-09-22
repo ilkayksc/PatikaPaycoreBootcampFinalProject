@@ -49,8 +49,8 @@ namespace PatikaPaycoreBootcampFinalProject.Controllers
             request.Password = MD5CipherExtension.MD5Encryption(request.Password);
 
             var result = _account.Insert(request);
-
-            BackgroundJob.Schedule(() => JobDelayed.Run("ilkay.ksc2@gmail.com",$"sayın {result.Response.Name}  {result.Response.Surname} hoşgeldiniz.", "Hoşgeldiniz"), TimeSpan.FromSeconds(2));
+            // Kullanıcı üye olduktan 2 sn sonra hoşgeldiniz maili gönderilir.
+            BackgroundJob.Schedule(() => JobDelayed.Run(result.Response.Email,$"sayın {result.Response.Name}  {result.Response.Surname} hoşgeldiniz.", "Hoşgeldiniz"), TimeSpan.FromSeconds(2));
 
             return result;
         }
