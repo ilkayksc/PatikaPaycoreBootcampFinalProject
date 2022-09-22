@@ -23,7 +23,7 @@ namespace PatikaPaycoreBootcampFinalProject
 
         public IConfiguration Configuration { get; }
         public static JwtConfig JwtConfig { get; private set; }
-       
+       public static SmtpConnectionString smtpConnstr { get; private set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -49,7 +49,9 @@ namespace PatikaPaycoreBootcampFinalProject
             // Configure JWT Bearer
             JwtConfig = Configuration.GetSection("JwtConfig").Get<JwtConfig>();
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
-
+            
+            // SmtpConnectionString
+            smtpConnstr = Configuration.GetSection("SmtpConnectionString").Get<SmtpConnectionString>();
 
             // service
             services.AddServices();
