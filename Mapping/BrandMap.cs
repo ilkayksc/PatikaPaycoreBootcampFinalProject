@@ -6,7 +6,7 @@ using PatikaPaycoreBootcampFinalProject.Model;
 namespace PatikaPaycoreBootcampHW3.Mapping
 {
     public class BrandMap : ClassMapping<Brand>
-    {   // Container tablosu map işlemleri
+    {   // Brand tablosu map işlemleri
         public BrandMap()
         {   // Primary key olduğu için property yerine id kullanıldı.
             Id(x => x.Id, x =>
