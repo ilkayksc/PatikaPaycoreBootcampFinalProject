@@ -15,7 +15,9 @@
 </ul>
 
 ## Uygulamanın Çalıştırılması
-Uygulamanın çalıştırılabilmesi için yukarıda belirtilen teknoloji ve kütüphanelerin projeye dahil edilmesi gerekmektedir.
+
+Uygulamanın çalıştırılabilmesi için ilk önce DBScript.sql dosyası ile veritabanı tablolarının oluşturulması gerekmektedir.
+Daha sonra yukarıda belirtilen teknoloji ve kütüphanelerin projeye dahil edilmesi gerekmektedir.
 Gerekli kütüphaneler eklendikten sonra AppSettings.json dosyası içerisinde aşağıda belirtilen alanlardaki bilgilerin girilmesi gerekmektedir.
 Bilgileri girdikten sonra uygulamayı çalıştırabilirsiniz.
 
